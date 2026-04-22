@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South Operations Details | Hey Service Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=9">
+</head>
+
+<body data-role="user">
+
+    <!-- Top Section -->
+    <header class="main-header site-header">
+        <div class="container site-header-container">
+            <a href="dashboard.html" class="logo">
+                <img src="Images/logo.png" alt="Hey Service Logo" class="header-logo">
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Dashboard Toolbar -->
+        <div class="dashboard-toolbar">
+
+            <!-- Navigation Wing -->
+            <div class="toolbar-nav">
+                <!-- Explicit Back Arrow -->
+                <a href="dashboard.html" class="back-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5"></path>
+                        <path d="M12 19l-7-7 7-7"></path>
+                    </svg>
+                    Back to Sites
+                </a>
+
+                <!-- Breadcrumbs -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb-list">
+                        <li><a href="login.html" class="breadcrumb-link">Login</a></li>
+                        <li class="breadcrumb-sep">/</li>
+                        <li><a href="dashboard.html" class="breadcrumb-link">Dashboard</a></li>
+                        <li class="breadcrumb-sep">/</li>
+                        <li class="breadcrumb-current" aria-current="page">South Operations</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <!-- Toolbar Tools -->
+            <div class="toolbar-tools">
+                <button id="alarmToggle" class="engineer-only alarm-toggle"
+                    title="Daily Site Summary">
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="icon-teal">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <span class="alarm-dot"></span>
+                </button>
+
+                <!-- Profile Avatar Widget -->
+                <div class="profile-widget profile-avatar" title="View Profile">
+                    <!-- Circle User SVG -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="icon-teal">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="10" r="3"></circle>
+                        <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Local Profile Dropdown Modal -->
+        <div id="profileDropdown" class="profile-dropdown">
+            <div class="profile-img-wrap">
+                <img src="Images/user.png" alt="Profile UI Image" class="profile-img"
+                    onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%231a56db\' stroke-width=\'2\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><circle cx=\'12\' cy=\'10\' r=\'3\'/><path d=\'M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662\'/></svg>'">
+            </div>
+            <div id="dropdownUsernameText" class="profile-name">Demo User</div>
+            <div class="profile-subtitle">Hey Service Member</div>
+            <button class="btn btn-primary profile-signout" onclick="logout()">Secure Sign Out</button>
+        </div>
+
+        <!-- Engineer Daily Alarm Modal -->
+        <div id="alarmSummaryModal" class="alarm-modal">
+            <h2 class="alarm-modal-heading">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                Daily Engineer Summary
+            </h2>
+            <div class="alarm-modal-body">
+                <div class="alarm-row alarm-row-safe">
+                    <span>South Operations</span> <span class="text-success">Safe (99.9%)</span>
+                </div>
+                <div class="alarm-row alarm-row-warn">
+                    <span>South Operations</span> <span class="text-warning">Warning (Demister)</span>
+                </div>
+                <div class="alarm-row alarm-row-danger">
+                    <span>West Generator</span> <span class="text-danger">Danger (Power)</span>
+                </div>
+                <div class="alarm-row alarm-row-safe">
+                    <span>South Operations</span> <span class="text-success">Safe (100%)</span>
+                </div>
+            </div>
+            <button class="btn btn-outline alarm-close-btn"
+                onclick="document.getElementById('alarmSummaryModal').style.display='none'">Acknowledge & Close</button>
+        </div>
+
+        <div class="split-layout">
+
+            <!-- Left/Mobile Top Panel: Status Section -->
+            <div class="side-panel warning side-panel-flex">
+
+                <div>
+                    <h1 class="site-title">South Operations</h1>
+                    <span class="status-indicator status-safe" class="mt-half">
+                        <span class="status-dot"></span>
+                        Safe State
+                    </span>
+                </div>
+
+                <!-- Gauge/Meter Representation -->
+                <div class="gauge-wrapper">
+                    <div class="gauge-label">Grease Level Gauge</div>
+                    <div class="gauge-container">
+                        <!-- Gauge Background -->
+                        <div class="gauge-bg"></div>
+                        <!-- Gauge inner circle to make it a donut arch -->
+                        <div class="gauge-inner"></div>
+                        <!-- Gauge Needle -->
+                        <div class="gauge-needle"></div>
+                    </div>
+                    <div class="gauge-value">10%</div>
+                </div>
+
+                <!-- Yes/No Indicators -->
+                <div class="indicator-section">
+                    <div class="indicator-row">
+                        <span class="indicator-label">Demister Status</span>
+                        <span class="indicator-badge indicator-badge-safe">YES</span>
+                    </div>
+                    <div class="indicator-row">
+                        <span class="indicator-label">Airflow</span>
+                        <span class="indicator-badge indicator-badge-safe">GOOD</span>
+                    </div>
+                </div>
+
+                <!-- Emergency Reports Section -->
+                <div class="engineer-only emergency-section">
+                    <h3 class="emergency-heading">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                        Emergency Reports
+                    </h3>
+                    <a href="mailto:johnoyetolaoluwafemi113@gmail.com?subject=Emergency%20Report" class="btn btn-emergency" style="text-decoration: none;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                        Send Report Now
+                    </a>
+                    <p class="emergency-note">
+                        Triggers manual SMS and email to all on-call engineers.</p>
+                </div>
+            </div>
+
+            <!-- Right/Mobile Bottom Panel: Data Grid & Details -->
+            <div class="main-content-panel">
+
+                <h2>Ventilation Data</h2>
+
+                <div class="data-grid">
+                    <div class="card data-card">
+                        <div class="data-card-label">Temperature Checks</div>
+                        <div class="data-card-value">30°C</div>
+                        <div class="data-card-trend-up">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                                <polyline points="17 6 23 6 23 12" />
+                            </svg>
+                            +3.2% vs last hour
+                        </div>
+                    </div>
+
+                    <div class="card data-card">
+                        <div class="data-card-label">Wind Rating</div>
+                        <div class="data-card-value">12 knots</div>
+                        <div class="data-card-trend-down">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
+                                <polyline points="17 18 23 18 23 12" />
+                            </svg>
+                            -1.5% vs last hour
+                        </div>
+                    </div>
+
+                    <div class="card data-card">
+                        <div class="data-card-label">Grease Level</div>
+                        <div class="data-card-value">100um</div>
+                        <div class="data-card-note">Nominal range</div>
+                    </div>
+
+                    <div class="card data-card">
+                        <div class="data-card-label">Network Latency</div>
+                        <div class="data-card-value-info">12ms</div>
+                        <div class="data-card-note-info">Optimal</div>
+                    </div>
+                </div>
+
+
+                <!-- Dynamic Airflow Telemetry Graph -->
+                <div class="card airflow-card">
+                    <div class="airflow-header">
+                        <h2 class="airflow-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                            Live Airflow Graph
+                        </h2>
+                    </div>
+                    
+                    <!-- The Graph Container -->
+                    <div class="airflow-chart">
+                        <div class="airflow-bar" style="animation-delay: 0.0s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.2s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.4s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.1s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.5s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.3s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.6s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.8s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.2s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.9s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -1.1s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.5s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -1.3s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.7s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -1.5s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.4s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -1.8s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -1.2s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -2.0s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.1s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -1.6s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -2.2s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -0.9s;"></div>
+                        <div class="airflow-bar" style="animation-delay: -2.4s;"></div>
+                    </div>
+                </div>
+
+                <div class="card maintenance-card">
+                    <h3 class="maintenance-heading">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                            <line x1="3" y1="9" x2="21" y2="9" />
+                            <line x1="9" y1="21" x2="9" y2="9" />
+                        </svg>
+                        Maintenance & Cleaning Overview
+                    </h3>
+                    <p class="maintenance-text">
+                        <strong>Last Serviced:</strong> October 12th, 2026<br>
+                        <strong>Technician:</strong> Sarah Jenkins<br><br>
+                        The Demister unit at the South Operations failed the routine cleaning inspection due to sediment
+                        blockage inside the secondary filter array. The unit is currently disabled. Recommended action
+                        is immediate replacement of the filter mesh to restore humidity and coolant flow to optimal
+                        green conditions.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Bottom Testimonials & Contact (from design spec sketch) -->
+        <div class="bottom-section">
+            <div class="grid bottom-grid">
+
+                
+                <!-- Live Camera Feed Section -->
+                <div class="camera-section">
+                    <h3 class="camera-heading">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-teal">
+                            <path d="M23 7l-7 5 7 5V7z"></path>
+                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                        </svg>
+                        Live Camera Feed
+                    </h3>
+                    
+                    <div class="camera-grid">
+                        <!-- Camera 1 -->
+                        <div class="camera-feed camera-feed-container">
+                            <video src="Images/Clean Vent.mp4" autoplay loop muted playsinline class="camera-video"></video>
+                            <div class="camera-label">
+                                <div class="camera-live-dot"></div>
+                                CAM 01
+                            </div>
+                        </div>
+                        
+                        <!-- Camera 2 -->
+                        <div class="camera-feed camera-feed-container">
+                            <video src="Images/Clean Vent.mp4" autoplay loop muted playsinline class="camera-video"></video>
+                            <div class="camera-label">
+                                <div class="camera-live-dot"></div>
+                                CAM 02
+                            </div>
+                        </div>
+
+                        <!-- Camera 3 -->
+                        <div class="camera-feed camera-feed-container">
+                            <video src="Images/Clean Vent.mp4" autoplay loop muted playsinline class="camera-video"></video>
+                            <div class="camera-label">
+                                <div class="camera-live-dot"></div>
+                                CAM 03
+                            </div>
+                        </div>
+
+                        <!-- Camera 4 -->
+                        <div class="camera-feed camera-feed-container">
+                            <video src="Images/Clean Vent.mp4" autoplay loop muted playsinline class="camera-video"></video>
+                            <div class="camera-label">
+                                <div class="camera-live-dot"></div>
+                                CAM 04
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact info per location -->
+                <div class="card contact-card">
+                    <h3>Site Contact details</h3>
+                    <p class="contact-detail"><strong class="contact-label">On-site Lead:</strong> John Manager</p>
+                    <p class="contact-detail"><strong class="contact-label">Phone:</strong> +44 113 496 0123</p>
+                    <p><strong class="contact-label">Radio Channel:</strong> CH-4 Delta</p>
+                    <button class="btn btn-call">Call Now</button>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="card testimonial-flex">
+                    <p class="testimonial-quote">
+                        "Since upgrading the monitoring system here at the East center, response times to hardware
+                        faults have improved by 45%. Outstanding operational clarity."
+                    </p>
+                    <h4 class="testimonial-author">- Regional Operations Director</h4>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Main Footer -->
+    <section id="footer" class="main-footer">
+        <div class="container">
+
+            <div class="footer-grid">
+                <!-- First Half: Big Sized Logo -->
+                <div class="footer-logo-container">
+                    <img src="Images/logo.png" alt="Hey Service Logo" class="footer-logo">
+                </div>
+
+                <!-- Second Half: Contact & Address -->
+                <div class="footer-contact-info">
+                    <h2 class="footer-heading">Get in Touch</h2>
+
+                    <address class="footer-address">
+                        Unit 2a Brindley Way,<br>
+                        Wakefield,<br>
+                        West Yorkshire<br>
+                        WF2 0XQ
+                    </address>
+
+                    <div class="footer-contacts">
+                        <a href="tel:+441924856390" class="footer-phone">+44 (0)1924 856390</a>
+                        <a href="mailto:info@theheygroup.net" class="footer-email">info@theheygroup.net</a>
+                    </div>
+
+                    <div class="footer-links">
+                        <a href="#">&rarr; Privacy Policy</a>
+                        <a href="#">&rarr; Terms and Conditions</a>
+                        <a href="#">&rarr; Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Icons (Bottom Strip) -->
+            <div class="social-strip">
+
+                <a href="https://www.linkedin.com/company/the-hey-group-ltd" target="_blank" class="social-icon"
+                    title="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.facebook.com/people/Hey-Service-Group/61578169043194/" target="_blank"
+                    class="social-icon" title="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.youtube.com/@HEYSERVICEGROUP-f4s" target="_blank" class="social-icon"
+                    title="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                        viewBox="0 0 576 512">
+                        <path
+                            d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.781 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.instagram.com/hey_servicegroup/" target="_blank" class="social-icon"
+                    title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.tiktok.com/@heyservicegroup2026?lang=en" target="_blank" class="social-icon"
+                    title="TikTok">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 162.6 186.9v86.32a76.24 76.24 0 1 0 86.34 75.58V14h86.34c2.14 48.91 32 89.6 80.37 99.8z" />
+                    </svg>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script src="js/main.js?v=5"></script>
+</body>
+
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sites Overview | Hey Service Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=12">
+</head>
+
+<body data-role="user">
+
+    <header class="main-header">
+        <div class="container nav-container">
+            <a href="dashboard.html" class="logo">
+                <img src="Images/logo.png" alt="Hey Service Logo" class="header-logo">
+            </a>
+            <input type="checkbox" id="navToggleDash" class="hamburger-toggle">
+            <label for="navToggleDash" class="hamburger-btn" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </label>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="dashboard.html">Sites</a></li>
+                    <li><a href="#contact" class="client-only">Contact</a></li>
+
+                    <!-- Engineer Only Links -->
+                </ul>
+            </nav>
+            <div class="nav-button-group">
+                <span class="role-badge" id="roleBadge">Mode</span>
+                <button onclick="logout()" class="btn btn-outline btn-logout">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container animation-container dashboard-main">
+        <div class="dashboard-content">
+
+            <!-- Dashboard Toolbar -->
+            <div class="dashboard-toolbar">
+
+                <!-- Navigation Wing -->
+                <div class="toolbar-nav">
+                    <!-- Explicit Back Arrow -->
+                    <a href="login.html" class="back-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5"></path>
+                            <path d="M12 19l-7-7 7-7"></path>
+                        </svg>
+                        Back to Login
+                    </a>
+
+                    <!-- Breadcrumbs -->
+                    <nav aria-label="breadcrumb">
+                        <ol id="dashBreadcrumb" class="breadcrumb-list">
+                            <li><a href="login.html" class="breadcrumb-link">Login</a></li>
+                            <li class="breadcrumb-sep">/</li>
+                            <li class="breadcrumb-current" aria-current="page">Dashboard</li>
+                            <!-- Add New Site breadcrumb injected dynamically by JS for engineers -->
+                        </ol>
+                    </nav>
+                </div>
+
+                <!-- Toolbar Tools -->
+                <div class="toolbar-tools">
+                    <button id="alarmToggle" class="engineer-only alarm-toggle"
+                        title="Daily Site Summary">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-teal">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <span class="alarm-dot"></span>
+                    </button>
+
+                    <!-- Profile Avatar Widget -->
+                    <div class="profile-widget profile-avatar" title="View Profile">
+                        <!-- Circle User SVG -->
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-teal">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="10" r="3"></circle>
+                            <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-header-row">
+                <div>
+                    <h1>Monitored Sites</h1>
+                    <p class="text-muted">Overview of all registered facilities and system statuses.</p>
+                </div>
+                <div class="engineer-only" style="display: none;">
+                    <button class="btn btn-primary" onclick="openAddSiteModal()">Add New Site</button>
+                </div>
+            </div>
+
+            <!-- All site cards rendered dynamically by JS -->
+            <div id="allSitesContainer"></div>
+        </div>
+
+        <!-- Add New Site Modal -->
+        <div id="addSiteModal" class="modal-overlay">
+            <div class="modal-box add-site-modal-box">
+                <button onclick="closeAddSiteModal()" class="modal-close-btn">&times;</button>
+                <h2 class="add-site-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                    Add New Site
+                </h2>
+                <p class="add-site-subtitle">Register a new facility to monitor on your dashboard.</p>
+                <form id="addSiteForm">
+                    <div class="form-field-group">
+                        <label class="form-field-label">Company / Site Name</label>
+                        <input type="text" id="newSiteName" required placeholder="e.g. Apex Manufacturing" class="form-field-input">
+                    </div>
+                    <div class="form-field-group-last">
+                        <label class="form-field-label">Location</label>
+                        <input type="text" id="newSiteLocation" required placeholder="e.g. Leeds, West Yorkshire" class="form-field-input">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-add-site">Done — Create Site</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Local Profile Dropdown Modal -->
+        <div id="profileDropdown" class="profile-dropdown">
+            <div class="profile-img-wrap">
+                <img src="Images/user.png" alt="Profile UI Image" class="profile-img"
+                    onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%231a56db\' stroke-width=\'2\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><circle cx=\'12\' cy=\'10\' r=\'3\'/><path d=\'M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662\'/></svg>'">
+            </div>
+            <div id="dropdownUsernameText" class="profile-name">Demo User
+            </div>
+            <div class="profile-subtitle">Hey Service Member</div>
+            <button class="btn btn-primary profile-signout" onclick="logout()">Secure Sign
+                Out</button>
+        </div>
+
+        <!-- Engineer Daily Alarm Modal (Dynamic) -->
+        <div id="alarmSummaryModal" class="alarm-modal-dynamic">
+
+            <!-- Modal Header -->
+            <div class="alarm-modal-header">
+                <div class="alarm-modal-header-row">
+                    <h2 class="alarm-modal-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        Daily Engineer Summary
+                    </h2>
+                    <button onclick="document.getElementById('alarmSummaryModal').style.display='none'"
+                        class="alarm-modal-close">&times;</button>
+                </div>
+                <p id="summaryDateLabel" class="alarm-modal-date">Report for: --</p>
+                <p class="alarm-modal-hint">Click a brand below to view all location summaries.</p>
+            </div>
+
+            <!-- Scrollable Content -->
+            <div id="alarmBrandList" class="alarm-brand-list">
+                <!-- Brands injected by JS -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="alarm-modal-footer">
+                <button class="btn btn-outline btn-full"
+                    onclick="document.getElementById('alarmSummaryModal').style.display='none'">Acknowledge &amp; Close</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Main Footer -->
+    <section id="footer" class="main-footer">
+        <div class="container">
+
+            <div class="footer-grid">
+                <!-- First Half: Big Sized Logo -->
+                <div class="footer-logo-container">
+                    <img src="Images/logo.png" alt="Hey Service Logo" class="footer-logo">
+                </div>
+
+                <!-- Second Half: Contact & Address -->
+                <div class="footer-contact-info">
+                    <h2 class="footer-heading">Get in Touch</h2>
+
+                    <address class="footer-address">
+                        Unit 2a Brindley Way,<br>
+                        Wakefield,<br>
+                        West Yorkshire<br>
+                        WF2 0XQ
+                    </address>
+
+                    <div class="footer-contacts">
+                        <a href="tel:+441924856390" class="footer-phone">+44 (0)1924 856390</a>
+                        <a href="mailto:info@theheygroup.net" class="footer-email">info@theheygroup.net</a>
+                    </div>
+
+                    <div class="footer-links">
+                        <a href="#">&rarr; Privacy Policy</a>
+                        <a href="#">&rarr; Terms and Conditions</a>
+                        <a href="#">&rarr; Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Icons (Bottom Strip) -->
+            <div class="social-strip">
+
+                <a href="https://www.linkedin.com/company/the-hey-group-ltd" target="_blank" class="social-icon"
+                    title="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.facebook.com/people/Hey-Service-Group/61578169043194/" target="_blank"
+                    class="social-icon" title="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.youtube.com/@HEYSERVICEGROUP-f4s" target="_blank" class="social-icon"
+                    title="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                        viewBox="0 0 576 512">
+                        <path
+                            d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.781 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.instagram.com/hey_servicegroup/" target="_blank" class="social-icon"
+                    title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.tiktok.com/@heyservicegroup2026?lang=en" target="_blank" class="social-icon"
+                    title="TikTok">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 162.6 186.9v86.32a76.24 76.24 0 1 0 86.34 75.58V14h86.34c2.14 48.91 32 89.6 80.37 99.8z" />
+                    </svg>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script src="js/site-data.js"></script>
+    <script src="js/main.js?v=8"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

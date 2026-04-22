@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Hey Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=10">
+    <!-- Authentication handled securely via backend server.py -->
+</head>
+
+<body>
+
+    <!-- Top Section (Hero/Header) -->
+    <header class="main-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="Images/logo.png" alt="Hey Service Logo" class="header-logo">
+            </a>
+            <input type="checkbox" id="navToggleLogin" class="hamburger-toggle">
+            <label for="navToggleLogin" class="hamburger-btn" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </label>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#quote">Contact</a></li>
+                </ul>
+            </nav>
+            <form id="globalSearchForm" class="search-form">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search pages..." required>
+                <button type="submit" class="btn btn-primary search-btn">Search</button>
+            </form>
+        </div>
+    </header>
+
+    <div class="login-wrapper">
+        <div class="login-box animation-container">
+            <div class="login-container">
+                <a href="index.html" class="back-arrow-btn" title="Return to Home">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-109.3-109.3H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H105.4l109.3-109.3c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+                    </svg>
+                </a>
+
+                <h2 class="login-heading">Welcome Back</h2>
+                <p class="text-muted login-subtitle">Sign in to your dashboard</p>
+
+                <div class="secure-notice">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    <span><strong>Secure Login</strong> — Credentials verified via encrypted server-side
+                        authentication.</span>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username" class="form-label-auth">Username or Email</label>
+                        <input type="text" id="username" class="form-control" placeholder="e.g. jdoe@company.com"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label-auth">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" class="form-control form-control-password"
+                                placeholder="••••••••" required>
+                            <button type="button" id="togglePasswordBtn" class="toggle-password" title="Show Password">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                                    viewBox="0 0 576 512">
+                                    <path
+                                        d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="login-actions">
+                        <button type="submit" class="btn btn-primary btn-full">Login to Dashboard</button>
+                        <div class="login-links">
+                            <a href="#" id="openForgotPasswordBtn" class="link-info">Forgot password?</a>
+                            <a href="#" id="openCreateAccountBtn" class="link-muted">Create an account</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Account Modal Overlay -->
+    <div id="createAccountModal" class="modal-overlay">
+        <div class="modal-box">
+            <button type="button" class="modal-close" id="closeCreateAccountBtn">&times;</button>
+            <h2 class="modal-heading">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="8.5" cy="7" r="4" />
+                    <line x1="20" y1="8" x2="20" y2="14" />
+                    <line x1="23" y1="11" x2="17" y2="11" />
+                </svg>
+                Create Account
+            </h2>
+            <p class="text-muted modal-subtitle">Register your business (User Access Only)</p>
+
+            <div id="createAccountMsg" class="modal-message"></div>
+
+            <form id="createAccountForm">
+                <div class="form-group text-left">
+                    <label class="modal-form-label">Company Name</label>
+                    <input type="text" id="regCompany" class="form-control" placeholder="e.g. Wagamama" required>
+                </div>
+                <div class="form-group text-left">
+                    <label class="modal-form-label">Email Address</label>
+                    <input type="email" id="regEmail" class="form-control" placeholder="admin@company.com" required>
+                </div>
+                <div class="form-group text-left">
+                    <label class="modal-form-label">Requested Username</label>
+                    <input type="text" id="regUsername" class="form-control" placeholder="e.g. restaurant12" required>
+                </div>
+                <div class="form-group text-left">
+                    <label class="modal-form-label">Desired Password</label>
+                    <input type="password" id="regPassword" class="form-control" placeholder="Min 6 characters" required
+                        minlength="6">
+                </div>
+
+                <button type="submit" id="regSubmitBtn" class="btn btn-primary modal-submit-btn">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal Overlay -->
+    <div id="forgotPasswordModal" class="modal-overlay">
+        <div class="modal-box">
+            <button type="button" class="modal-close" id="closeForgotPasswordBtn">&times;</button>
+            <h2 class="modal-heading">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                Reset Password
+            </h2>
+            <p class="text-muted modal-subtitle">Enter your details below to set a new password.</p>
+
+            <div id="forgotPasswordMsg" class="modal-message"></div>
+
+            <form id="forgotPasswordForm">
+                <div class="form-group text-left">
+                    <label class="modal-form-label">Email Address</label>
+                    <input type="email" id="fpEmail" class="form-control" placeholder="admin@company.com" required>
+                </div>
+                <div class="form-group text-left">
+                    <label class="modal-form-label">Username</label>
+                    <input type="text" id="fpUsername" class="form-control" placeholder="Your registered username"
+                        required>
+                </div>
+                <div class="form-group text-left">
+                    <label class="modal-form-label">New Password</label>
+                    <input type="password" id="fpNewPassword" class="form-control" placeholder="Min 6 characters"
+                        required minlength="6">
+                </div>
+
+                <button type="submit" id="fpSubmitBtn" class="btn btn-primary modal-submit-btn">Reset Password</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Main Footer -->
+    <section id="footer" class="main-footer">
+        <div class="container">
+
+            <div class="footer-grid">
+                <!-- First Half: Big Sized Logo -->
+                <div class="footer-logo-container">
+                    <img src="Images/logo.png" alt="Hey Service Logo" class="footer-logo">
+                </div>
+
+                <!-- Second Half: Contact & Address -->
+                <div class="footer-contact-info">
+                    <h2 class="footer-heading">Get in Touch</h2>
+
+                    <address class="footer-address">
+                        Unit 2a Brindley Way,<br>
+                        Wakefield,<br>
+                        West Yorkshire<br>
+                        WF2 0XQ
+                    </address>
+
+                    <div class="footer-contacts">
+                        <a href="tel:+441924856390" class="footer-phone">+44 (0)1924 856390</a>
+                        <a href="mailto:info@theheygroup.net" class="footer-email">info@theheygroup.net</a>
+                    </div>
+
+                    <div class="footer-links">
+                        <a href="#">&rarr; Privacy Policy</a>
+                        <a href="#">&rarr; Terms and Conditions</a>
+                        <a href="#">&rarr; Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Icons (Bottom Strip) -->
+            <div class="social-strip">
+
+                <a href="https://www.linkedin.com/company/the-hey-group-ltd" target="_blank" class="social-icon"
+                    title="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.facebook.com/people/Hey-Service-Group/61578169043194/" target="_blank"
+                    class="social-icon" title="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 320 512">
+                        <path
+                            d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.youtube.com/@HEYSERVICEGROUP-f4s" target="_blank" class="social-icon"
+                    title="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor"
+                        viewBox="0 0 576 512">
+                        <path
+                            d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.781 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.instagram.com/hey_servicegroup/" target="_blank" class="social-icon"
+                    title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.tiktok.com/@heyservicegroup2026?lang=en" target="_blank" class="social-icon"
+                    title="TikTok">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 162.6 186.9v86.32a76.24 76.24 0 1 0 86.34 75.58V14h86.34c2.14 48.91 32 89.6 80.37 99.8z" />
+                    </svg>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+
+    <script src="js/main.js?v=8"></script>
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Service | Monitoring Dashboard</title>
+    <meta name="description"
+        content="Hey Service - Ensure your systems are running smoothly with our monitoring dashboard">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=14">
+</head>
+
+<body>
+
+    <!-- Top Section (Hero/Header) -->
+    <header class="main-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="Images/logo.png" alt="Hey Service Logo" class="header-logo">
+            </a>
+            <input type="checkbox" id="navToggleIndex" class="hamburger-toggle">
+            <label for="navToggleIndex" class="hamburger-btn" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </label>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#quote">Contact</a></li>
+                </ul>
+            </nav>
+            <form id="globalSearchForm" class="search-form">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search pages..." required>
+                <button type="submit" class="btn btn-primary search-btn">Search</button>
+            </form>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <video src="Images/Logo%20Animation.mp4" class="hero-video" autoplay loop muted playsinline></video>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>Advanced Service Monitoring</h1>
+            <p class="hero-text">Real-time data, instant alerts, and
+                comprehensive site performance reports—all in one intelligent dashboard.</p>
+        </div>
+    </section>
+
+    <!-- Main Highlight Section (Mobile Only) -->
+    <section class="highlight-section animation-container">
+        <div class="container highlight-content">
+            <h2 class="highlight-title">Your Operations, Visualized</h2>
+            <p class="highlight-text">
+                Get complete visibility over your distributed infrastructure. Identify bottlenecks before they become
+                critical and empower your teams with real-time insight.
+            </p>
+            <a href="login.html" class="btn btn-primary highlight-btn">Access Dashboard</a>
+        </div>
+    </section>
+
+    <!-- Bottom Section: Clients & Testimonials -->
+    <section class="clients-section">
+        <div class="container">
+            <!-- Header -->
+            <h2 class="clients-title">These are just a few of the clients we work with.</h2>
+
+            <!-- Logos Grid: Exactly 4 Top, 4 Bottom -->
+            <div class="clients-grid">
+                <img src="Images/wagamamalogo.png" alt="Wagamama" class="client-logo client-logo-custom">
+                <img src="Images/five guys.png" alt="Five Guys" class="client-logo client-logo-custom">
+                <img src="Images/Zaap logo .png" alt="Zaap" class="client-logo client-logo-custom">
+                <img src="Images/Premier Inn logo.png" alt="Premier Inn" class="client-logo client-logo-custom">
+
+                <img src="Images/Barblock logo .png" alt="Bar+Block" class="client-logo client-logo-custom">
+                <img src="Images/goodman logo.png" alt="Goodman" class="client-logo client-logo-custom">
+                <img src="Images/Thai express.png" alt="Thai express" class="client-logo client-logo-custom">
+                <img src="Images/cote.png" alt="Côte" class="client-logo client-logo-custom">
+            </div>
+
+            <!-- Testimonials: 3 Cards -->
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="card testimonial-card-pad border-success">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "The Hey Service platform has fundamentally transformed how we monitor our commercial kitchen
+                        exhaust systems. We've completely eliminated unpredictable downtime, and the automated alert
+                        system ensures absolute compliance across all regional branches."</p>
+                    <h4 class="testimonial-author">Operations Director</h4>
+                    <span class="testimonial-role">National Restaurant Chain</span>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="card testimonial-card-pad border-info">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Implementing their custom dashboard gave our facilities management team unparalleled oversight.
+                        Tracking ambient temperature and latency anomalies in real-time has kept our multi-site hotel
+                        infrastructure operating flawlessly through peak seasons."</p>
+                    <h4 class="testimonial-author">Head of Infrastructure</h4>
+                    <span class="testimonial-role">Hospitality Group</span>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="card testimonial-card-pad border-secondary">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "We manage data metrics remotely, so the role-based dashboard logic is invaluable. Engineers
+                        receive precise diagnostic data via instant push-alerts the exact moment a sensor drifts out of
+                        tolerance. It easily paid for itself in month one."</p>
+                    <h4 class="testimonial-author">Lead Technical Engineer</h4>
+                    <span class="testimonial-role">Premium Dining Syndicate</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form & Hours Section -->
+    <section id="quote" class="quote-section">
+        <div class="container">
+            <div class="quote-container">
+                
+                <!-- Left Side: Text and Hours -->
+                <div class="contact-divider">
+                    <h2 class="quote-title">Request a Quote or Consultation Today</h2>
+                    <p class="quote-subtitle">
+                        Contact Hey Service Group to schedule your commercial kitchen cleaning, fire damper testing, or high-level cleaning. Call us on 01924 856 390, email enquiries@theheygroup.net, or use our chat for instant assistance.
+                    </p>
+
+                    <div class="contact-detail-block">
+                        <strong class="contact-detail-title">Mail</strong>
+                        <a href="mailto:enquiries@theheygroup.net" class="contact-detail-link">enquiries@theheygroup.net</a>
+                    </div>
+                    
+                    <div class="contact-detail-block-alt">
+                        <strong class="contact-detail-title">Phone</strong>
+                        <a href="tel:01924856390" class="contact-detail-link">01924 856 390</a>
+                    </div>
+
+                    <div>
+                        <strong class="hours-title">BUSINESS HOURS</strong>
+                        <div class="hours-row">
+                            <span class="hours-day">Mon - Fri</span>
+                            <strong class="hours-time">9:00 am - 5:00 pm</strong>
+                        </div>
+                        <div class="hours-row border-bottom-none">
+                            <span class="hours-day">Sat - Sun</span>
+                            <strong class="hours-closed">Closed</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Form -->
+                <div>
+                    <h3 class="form-title">Send your details</h3>
+                    <form class="quote-form mailto-form" data-subject="New Quote Request from Website">
+                        <div>
+                            <label class="form-label">Name</label>
+                            <input type="text" name="Name" required class="form-control form-input-custom" placeholder="Your full name">
+                        </div>
+                        <div>
+                            <label class="form-label">Email</label>
+                            <input type="email" name="Email" required class="form-control form-input-custom" placeholder="you@company.com">
+                        </div>
+                        <div>
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" name="Phone Number" required class="form-control form-input-custom" placeholder="01924...">
+                        </div>
+                        <div>
+                            <label class="form-label">How did you hear about us?</label>
+                            <select name="Source" required class="form-control form-select-custom">
+                                <option value="" disabled selected>Select an option</option>
+                                <option>Search Engine (Google, Bing)</option>
+                                <option>Social Media</option>
+                                <option>Referral / Word of Mouth</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Message</label>
+                            <textarea name="Message" required class="form-control form-textarea form-input-custom" rows="4" placeholder="How can we help?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary quote-submit-btn">Submit Request</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Footer -->
+    <section id="footer" class="main-footer">
+        <div class="container">
+            
+            <div class="footer-grid">
+                <!-- First Half: Big Sized Logo -->
+                <div class="footer-logo-container">
+                    <img src="Images/logo.png" alt="Hey Service Logo" class="footer-logo">
+                </div>
+
+                <!-- Second Half: Contact & Address -->
+                <div class="footer-contact-info">
+                    <h2 class="footer-heading">Get in Touch</h2>
+
+                    <address class="footer-address">
+                        Unit 2a Brindley Way,<br>
+                        Wakefield,<br>
+                        West Yorkshire<br>
+                        WF2 0XQ
+                    </address>
+
+                    <div class="footer-contacts">
+                        <a href="tel:+441924856390" class="footer-phone">+44 (0)1924 856390</a>
+                        <a href="mailto:info@theheygroup.net" class="footer-email">info@theheygroup.net</a>
+                    </div>
+
+                    <div class="footer-links">
+                        <a href="#">&rarr; Privacy Policy</a>
+                        <a href="#">&rarr; Terms and Conditions</a>
+                        <a href="#">&rarr; Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Icons (Bottom Strip) -->
+            <div class="social-strip">
+                
+                <a href="https://www.linkedin.com/company/the-hey-group-ltd" target="_blank" class="social-icon" title="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+                </a>
+                
+                <a href="https://www.facebook.com/people/Hey-Service-Group/61578169043194/" target="_blank" class="social-icon" title="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+                </a>
+                
+                <a href="https://www.youtube.com/@HEYSERVICEGROUP-f4s" target="_blank" class="social-icon" title="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.781 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+                </a>
+                
+                <a href="https://www.instagram.com/hey_servicegroup/" target="_blank" class="social-icon" title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+                </a>
+                
+                <a href="https://www.tiktok.com/@heyservicegroup2026?lang=en" target="_blank" class="social-icon" title="TikTok">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 448 512"><path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 162.6 186.9v86.32a76.24 76.24 0 1 0 86.34 75.58V14h86.34c2.14 48.91 32 89.6 80.37 99.8z"/></svg>
+                </a>
+                
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <script src="js/main.js?v=8"></script>
+</body>
+
+</html>
