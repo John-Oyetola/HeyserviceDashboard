@@ -59,6 +59,17 @@ body[data-role="engineer"] {
     --bg-main: #fff0f0;
 }
 
+/* Dark Mode Theme Override */
+body.dark-theme {
+    --bg-main: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #f4f6f8;
+    --text-muted: #a0a0a0;
+    --text-light: #ffffff;
+}
+
+/* Base Body Styles */
+
 /* Reset */
 * {
     margin: 0;
@@ -1061,4 +1072,24 @@ h3 { font-size: 1.5rem; }
 
     /* Maintenance text */
     .maintenance-text { font-size: 0.85rem; }
+}
+
+/* Dark Mode Toggle */
+.theme-toggle-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-main);
+    transition: var(--transition-fast);
+    margin-left: 1rem;
+}
+
+.theme-toggle-btn:hover {
+    background: var(--bg-main);
 }
