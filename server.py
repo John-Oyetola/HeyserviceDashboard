@@ -222,8 +222,8 @@ class HeyServiceHandler(http.server.SimpleHTTPRequestHandler):
             # Hash the password securely
             password_hash = hash_password(password)
 
-            # Write to Excel
-            add_user(username, password_hash, 'user', email, company)
+            # Write to Excel, passing company as the assigned_brand so they only see their own company
+            add_user(username, password_hash, 'user', email, company, company)
 
             print(f"[REGISTER] New user created: {username} ({email}) - Company: {company}")
 

@@ -51,6 +51,15 @@ function renderAllSites() {
         ? { [assignedBrand]: grouped[assignedBrand] || [] }
         : grouped;
 
+    // Auto-generate randomized demo data for new companies that don't have hardcoded locations
+    if (role === 'user' && assignedBrand && assignedBrand !== 'all' && brandsToShow[assignedBrand].length === 0) {
+        brandsToShow[assignedBrand] = [
+            { id: 'demo1', brand: assignedBrand, location: 'London (HQ)', temp: Math.floor(Math.random() * 20) + 20, wind: Math.floor(Math.random() * 15) + 5, demister: Math.random() > 0.5, grease: Math.floor(Math.random() * 100), airflow: ['GOOD', 'MODERATE', 'POOR'][Math.floor(Math.random() * 3)] },
+            { id: 'demo2', brand: assignedBrand, location: 'Manchester', temp: Math.floor(Math.random() * 20) + 20, wind: Math.floor(Math.random() * 15) + 5, demister: Math.random() > 0.5, grease: Math.floor(Math.random() * 100), airflow: ['GOOD', 'MODERATE', 'POOR'][Math.floor(Math.random() * 3)] },
+            { id: 'demo3', brand: assignedBrand, location: 'Birmingham', temp: Math.floor(Math.random() * 20) + 20, wind: Math.floor(Math.random() * 15) + 5, demister: Math.random() > 0.5, grease: Math.floor(Math.random() * 100), airflow: ['GOOD', 'MODERATE', 'POOR'][Math.floor(Math.random() * 3)] }
+        ];
+    }
+
     for (const brand in brandsToShow) {
         if (!brandsToShow[brand] || brandsToShow[brand].length === 0) continue;
 

@@ -3,26 +3,27 @@
 // Secure authentication via backend server.py API endpoints.
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Bubble Animation Generator for elements with .animation-container
     const animContainers = document.querySelectorAll('.animation-container');
-    
+
     animContainers.forEach(container => {
         // Adjust bubble count to strictly 10 for phones, keeping the full 40 for tablets and desktops
         const isPhone = window.innerWidth <= 600; // Standard max width for phone viewports
-        const bubbleCount = isPhone ? 10 : 40;
-        
+        const bubbleCount = isPhone ? 5 : 40;
+
         // Dynamic distribution points
         const leftLimit = Math.floor(bubbleCount * 0.375);
         const rightLimit = leftLimit * 2;
-        
-        for(let i = 0; i < bubbleCount; i++) {
+
+        for (let i = 0; i < bubbleCount; i++) {
             const bubble = document.createElement('div');
             bubble.classList.add('bubble');
-            
+
             // Random properties
-            const size = Math.random() * 100 + 40; // 40px - 140px
-            
+            let size = Math.random() * 100 + 40; // Desktop: 40px - 140px
+            if (isPhone) size = 40; // All mobile bubbles are exactly the smallest size (40px)
+
             // Distributed Layout proportional to total count
             let left;
             if (i < leftLimit) {
@@ -32,27 +33,27 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 left = Math.random() * 40 + 30; // 30% - 70% (Middle)
             }
-            
+
             const top = Math.random() * 100; // 0% - 100%
             const delay = Math.random() * 2; // 0s - 2s
             const duration = Math.random() * 1.5 + 2; // 2s - 3.5s (Twice as fast)
-            
+
             // Safely lock all bubbles to the user's manually requested vibrant hue palette
             let allowedColors = ['#2e7d32', '#1565c0', '#6a1b9a', '#c62828', '#ef6c00', '#00838f', '#ad1457'];
             const randomColor = allowedColors[Math.floor(Math.random() * allowedColors.length)];
-            
+
             // Reapply corrected background color
             // Reapply corrected background color
             bubble.style.backgroundColor = randomColor;
-            bubble.style.opacity = container.classList.contains('login-box') ? '0.4' : '1'; 
-            bubble.style.filter = 'saturate(0.6)'; 
+            bubble.style.opacity = container.classList.contains('login-box') ? '0.4' : '1';
+            bubble.style.filter = 'saturate(0.6)';
             bubble.style.width = `${size}px`;
             bubble.style.height = `${size}px`;
             bubble.style.left = `${left}%`;
             bubble.style.top = `${top}%`;
             bubble.style.animationDelay = `${delay}s`;
             bubble.style.animationDuration = `${duration}s`;
-            
+
             container.appendChild(bubble);
         }
     });
@@ -69,15 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === Secure Server-Side Login Handler ===
     const loginForm = document.getElementById('loginForm');
-    if(loginForm) {
+    if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const usernameInput = document.getElementById('username').value.trim();
             const passwordInput = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('errorMessage');
             const submitBtn = loginForm.querySelector('button[type="submit"]');
-            
+
             // UI Feedback
             const originalBtnText = submitBtn.textContent;
             submitBtn.textContent = 'Authenticating...';
@@ -123,15 +124,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentRole = localStorage.getItem('heyServiceRole');
     if (currentRole) {
         document.body.setAttribute('data-role', currentRole);
-        
+
         // Update navigation UI conditionally based on role
         const engOnlyItems = document.querySelectorAll('.engineer-only');
         const clientOnlyItems = document.querySelectorAll('.client-only');
-        
-        if(currentRole === 'user') {
+
+        if (currentRole === 'user') {
             engOnlyItems.forEach(item => item.style.display = 'none');
             clientOnlyItems.forEach(item => item.style.display = 'block');
-        } else if(currentRole === 'engineer') {
+        } else if (currentRole === 'engineer') {
             engOnlyItems.forEach(item => item.style.display = 'block');
             clientOnlyItems.forEach(item => item.style.display = 'none');
         }
@@ -160,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 }
             }
-            
+
             // Redirect with query parameter
             window.location.href = foundUrl + '?search=' + encodeURIComponent(query);
         });
@@ -176,20 +177,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // === Mailto Email Submission Engine ===
-    
+
     // Universal Mailto Form Handler
     const mailtoForms = document.querySelectorAll('.mailto-form');
     mailtoForms.forEach(form => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             // Extract Subject from form dataset
             const subject = encodeURIComponent(form.getAttribute('data-subject') || "New Website Submission");
-            
+
             // Extract all inputs matching 'name'
             let bodyText = "Hello Admin,\n\nA new submission has been received from the Hey Service Portal:\n\n";
             bodyText += "---------------------------------------\n";
-            
+
             const inputs = form.querySelectorAll('input[name], select[name], textarea[name]');
             inputs.forEach(input => {
                 const title = input.getAttribute('name');
@@ -197,16 +198,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 bodyText += `${title}: ${val}\n`;
             });
             bodyText += "---------------------------------------\n";
-            
+
             const bodyEncoded = encodeURIComponent(bodyText);
-            
+
             // Re-route browser strictly to pre-filled email native client
             window.location.href = `mailto:johnoyetolaoluwafemi113@gmail.com?subject=${subject}&body=${bodyEncoded}`;
-            
+
             // Reset and cleanly close out modal if it resides inside one
             form.reset();
             const modal = form.closest('.modal-overlay');
-            if(modal) {
+            if (modal) {
                 modal.classList.remove('active');
                 setTimeout(() => modal.style.display = 'none', 300);
             }
@@ -221,11 +222,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (openCreateBtn && createModal) {
         openCreateBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            createModal.style.display = 'flex'; 
+            createModal.style.display = 'flex';
             setTimeout(() => createModal.classList.add('active'), 10);
         });
     }
-    
+
     if (closeCreateBtn && createModal) {
         closeCreateBtn.addEventListener('click', () => {
             createModal.classList.remove('active');
@@ -376,10 +377,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdownUsernameTexts = document.querySelectorAll('#dropdownUsernameText');
     const alarmToggles = document.querySelectorAll('#alarmToggle');
     const alarmModals = document.querySelectorAll('#alarmSummaryModal');
-    
+
     // Grab the literal logged in user from caching engine natively
     const storedUsername = localStorage.getItem('heyServiceUser') || 'Demo User';
-    
+
     // Inject literal username strictly into the dropdowns
     dropdownUsernameTexts.forEach(txt => txt.textContent = storedUsername);
 
@@ -402,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
         profileDropdowns.forEach((dropdown, index) => {
             if (dropdown.style.display === 'block') {
                 dropdown.style.display = 'none';
-                if(profileWidgets[index]) profileWidgets[index].style.borderColor = 'var(--border-color)';
+                if (profileWidgets[index]) profileWidgets[index].style.borderColor = 'var(--border-color)';
             }
         });
     });
@@ -420,7 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (alarmModals[index]) alarmModals[index].style.display = 'block';
             });
         });
-        
+
         // Auto-show daily alarm definitively on their very first session load
         if (!sessionStorage.getItem('engineerAlarmSeen')) {
             setTimeout(() => {
