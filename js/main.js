@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reapply corrected background color
             // Reapply corrected background color
             bubble.style.backgroundColor = randomColor;
-            bubble.style.opacity = container.classList.contains('login-box') ? '0.4' : '1';
+            bubble.style.opacity = container.classList.contains('login-box') ? '0.2' : '1';
             bubble.style.filter = 'saturate(0.6)';
             bubble.style.width = `${size}px`;
             bubble.style.height = `${size}px`;
