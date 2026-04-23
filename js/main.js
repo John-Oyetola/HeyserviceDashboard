@@ -138,6 +138,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Close mobile nav when clicking any link and handle smooth scroll
+    const navLinksList = document.querySelectorAll('.nav-links a');
+    const navToggles = document.querySelectorAll('.hamburger-toggle');
+    navLinksList.forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Close mobile menu
+            navToggles.forEach(toggle => toggle.checked = false);
+            
+            // Extract the target hash (e.g. #quote)
+            const href = link.getAttribute('href');
+            if (href) {
+                let targetId = '';
+                if (href.startsWith('#')) {
+                    targetId = href;
+                } else if (href.includes('#')) {
+                    // Extract hash if it starts with index.html#quote
+                    const urlObj = new URL(href, window.location.href);
+                    if (urlObj.pathname === window.location.pathname) {
+                        targetId = urlObj.hash;
+                    }
+                }
+                
+                if (targetId) {
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        // Small timeout lets the menu closing animation start before jumping
+                        setTimeout(() => targetEl.scrollIntoView({ behavior: 'smooth' }), 150);
+                    }
+                }
+            }
+        });
+    });
+
     // Global Search Logic
     const searchForm = document.getElementById('globalSearchForm');
     if (searchForm) {
