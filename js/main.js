@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('themeToggleBtn');
 
     const LOGO_LIGHT = 'Images/HEY CMYK LOGO_BlackText.svg';
-    const LOGO_DARK  = 'Images/HEY CMYK LOGO_WhiteText.svg';
+    const LOGO_DARK  = 'Images/HEY WHITE LOGO.svg';
 
     function applyLogos(isDark) {
         const headerSrc = isDark ? LOGO_DARK : LOGO_LIGHT;
