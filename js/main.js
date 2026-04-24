@@ -127,9 +127,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const LOGO_DARK  = 'Images/HEY CMYK LOGO_WhiteText.svg';
 
     function applyLogos(isDark) {
-        const src = isDark ? LOGO_DARK : LOGO_LIGHT;
-        document.querySelectorAll('.header-logo, .footer-logo').forEach(img => {
-            img.src = src;
+        const headerSrc = isDark ? LOGO_DARK : LOGO_LIGHT;
+        // Header: swap with theme
+        document.querySelectorAll('.header-logo').forEach(img => {
+            img.src = headerSrc;
+        });
+        // Footer: always white (footer background is always blue)
+        document.querySelectorAll('.footer-logo').forEach(img => {
+            img.src = LOGO_DARK;
         });
     }
 
