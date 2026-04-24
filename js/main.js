@@ -123,18 +123,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dark Mode Toggle Logic
     const themeToggleBtn = document.getElementById('themeToggleBtn');
 
-    const LOGO_LIGHT = 'Images/HEY CMYK LOGO_BlackText.svg';
-    const LOGO_DARK  = 'Images/HEY WHITE LOGO.svg';
+    const LOGO_HEADER = 'Images/HEY CMYK LOGO_WhiteText.svg';
+    const LOGO_FOOTER = 'Images/HEY WHITE LOGO.svg';
 
-    function applyLogos(isDark) {
-        const headerSrc = isDark ? LOGO_DARK : LOGO_LIGHT;
-        // Header: swap with theme
+    function applyLogos() {
+        // Header: always white text logo
         document.querySelectorAll('.header-logo').forEach(img => {
-            img.src = headerSrc;
+            img.src = LOGO_HEADER;
         });
-        // Footer: always white (footer background is always blue)
+        // Footer: always HEY WHITE LOGO
         document.querySelectorAll('.footer-logo').forEach(img => {
-            img.src = LOGO_DARK;
+            img.src = LOGO_FOOTER;
         });
     }
 
@@ -143,14 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-theme');
     }
-    applyLogos(document.body.classList.contains('dark-theme'));
+    applyLogos();
 
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-theme');
             const isDark = document.body.classList.contains('dark-theme');
             localStorage.setItem('heyServiceTheme', isDark ? 'dark' : 'light');
-            applyLogos(isDark);
+            applyLogos();
         });
     }
 
