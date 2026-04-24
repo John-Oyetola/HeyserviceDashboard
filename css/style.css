@@ -107,6 +107,26 @@ body.dark-theme .form-control {
     color: #fff !important;
 }
 
+/* Quote / contact form text — force everything white in dark mode */
+body.dark-theme .quote-title,
+body.dark-theme .quote-subtitle,
+body.dark-theme .form-title,
+body.dark-theme .form-label,
+body.dark-theme .contact-detail-title,
+body.dark-theme .hours-title,
+body.dark-theme .hours-day,
+body.dark-theme .hours-time,
+body.dark-theme .hours-closed {
+    color: #ffffff !important;
+}
+
+/* Testimonial card text — force white in dark mode */
+body.dark-theme .testimonial-text,
+body.dark-theme .testimonial-role,
+body.dark-theme .testimonial-quote {
+    color: #cccccc !important;
+}
+
 @media (max-width: 768px) {
     body.dark-theme .nav-links {
         background: rgba(20,20,20,0.98) !important;
