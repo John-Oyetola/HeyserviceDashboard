@@ -122,17 +122,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dark Mode Toggle Logic
     const themeToggleBtn = document.getElementById('themeToggleBtn');
-    
-    // Check local storage for theme preference on load
-    if (localStorage.getItem('heyServiceTheme') === 'dark') {
+
+    const LOGO_LIGHT = 'Images/HEY CMYK LOGO_BlackText.svg';
+    const LOGO_DARK  = 'Images/HEY CMYK LOGO_WhiteText.svg';
+
+    function applyLogos(isDark) {
+        const src = isDark ? LOGO_DARK : LOGO_LIGHT;
+        document.querySelectorAll('.header-logo, .footer-logo').forEach(img => {
+            img.src = src;
+        });
+    }
+
+    // Apply theme + logos on page load
+    const savedTheme = localStorage.getItem('heyServiceTheme');
+    if (savedTheme === 'dark') {
         document.body.classList.add('dark-theme');
     }
+    applyLogos(document.body.classList.contains('dark-theme'));
 
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-theme');
             const isDark = document.body.classList.contains('dark-theme');
             localStorage.setItem('heyServiceTheme', isDark ? 'dark' : 'light');
+            applyLogos(isDark);
         });
     }
 
