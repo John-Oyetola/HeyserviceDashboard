@@ -78,7 +78,8 @@ body.dark-theme .clients-section,
 body.dark-theme .profile-dropdown,
 body.dark-theme .alarm-modal,
 body.dark-theme .alarm-modal-dynamic,
-body.dark-theme .gauge-wrapper {
+body.dark-theme .gauge-wrapper,
+body.dark-theme .dashboard-main {
     background-color: var(--bg-card) !important;
     color: var(--text-main) !important;
 }
