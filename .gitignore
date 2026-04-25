@@ -1,0 +1,4 @@
+
+# Archives and system files
+*.zip
+.DS_Store

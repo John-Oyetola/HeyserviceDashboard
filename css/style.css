@@ -757,6 +757,54 @@ h3 { font-size: 1.5rem; }
 .link-info { color: var(--color-info); }
 .link-muted { color: var(--text-main); font-weight: 700; }
 
+/* --- Quote Form Success Message --- */
+.quote-success-msg {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: linear-gradient(135deg, rgba(46,125,50,0.12), rgba(46,125,50,0.06));
+    border: 1.5px solid var(--color-success);
+    border-radius: 10px;
+    padding: 1.5rem 1.25rem;
+    color: #1b5e20;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+.quote-success-msg svg { flex-shrink: 0; color: var(--color-success); margin-top: 0.15rem; }
+body.dark-theme .quote-success-msg { color: #a5d6a7; border-color: var(--color-success); background: rgba(46,125,50,0.15); }
+
+/* --- Dashboard Login Welcome Banner --- */
+.login-welcome-banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, rgba(0,131,143,0.12), rgba(0,131,143,0.05));
+    border: 1.5px solid var(--color-info);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+    font-size: 1rem;
+    line-height: 1.6;
+    position: relative;
+    transition: opacity 0.4s ease;
+}
+.login-welcome-banner svg { flex-shrink: 0; color: var(--color-success); }
+.welcome-banner-close {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--text-muted);
+    margin-left: auto;
+    padding: 0 0.25rem;
+    transition: color 0.2s;
+}
+.welcome-banner-close:hover { color: var(--text-main); }
+
+
 /* --- Modal Form Styles --- */
 .modal-heading { margin-bottom: 0.5rem; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem; font-size: 1.6rem; }
 .modal-subtitle { margin-bottom: var(--spacing-md); color: var(--text-main); font-weight: 700; font-size: 1.1rem; }

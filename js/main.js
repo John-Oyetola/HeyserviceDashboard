@@ -178,6 +178,58 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // === Login Welcome Banner (dashboard page) ===
+    const welcomeBanner = document.getElementById('loginWelcomeBanner');
+    if (welcomeBanner) {
+        const bannerShown = sessionStorage.getItem('welcomeBannerShown');
+        if (!bannerShown) {
+            const user    = localStorage.getItem('heyServiceUser')    || 'User';
+            const role    = localStorage.getItem('heyServiceRole')    || 'user';
+            const company = localStorage.getItem('heyServiceCompany') || 'Hey Service';
+            const roleLabel = role === 'engineer' ? 'Engineer (Admin)' : 'Client';
+
+            welcomeBanner.innerHTML = `
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div>
+                    <strong>Logged in as: ${roleLabel}</strong><br>
+                    <span>${user} &mdash; ${company}</span>
+                </div>
+                <button class="welcome-banner-close" onclick="this.parentElement.style.display='none'" aria-label="Dismiss">&times;</button>
+            `;
+            welcomeBanner.style.display = 'flex';
+            sessionStorage.setItem('welcomeBannerShown', '1');
+
+            // Auto-dismiss after 6 seconds
+            setTimeout(() => {
+                welcomeBanner.style.opacity = '0';
+                setTimeout(() => welcomeBanner.style.display = 'none', 400);
+            }, 6000);
+        }
+    }
+
+    // === Quote / Contact Form Feedback ===
+    const quoteForm = document.getElementById('quoteContactForm');
+    if (quoteForm) {
+        quoteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('quoteSubmitBtn');
+            const successMsg = document.getElementById('quoteSuccessMsg');
+
+            // Button loading state
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            // Simulate a brief send delay then show success
+            setTimeout(() => {
+                quoteForm.style.display = 'none';
+                if (successMsg) {
+                    successMsg.style.display = 'flex';
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 800);
+        });
+    }
+
     // Close mobile nav when clicking any link and handle smooth scroll
     const navLinksList = document.querySelectorAll('.nav-links a');
     const navToggles = document.querySelectorAll('.hamburger-toggle');

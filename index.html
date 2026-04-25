@@ -159,7 +159,17 @@
                 <!-- Right Side: Form -->
                 <div>
                     <h3 class="form-title">Send your details</h3>
-                    <form class="quote-form mailto-form" data-subject="New Quote Request from Website">
+
+                    <!-- Success message (shown after submit) -->
+                    <div id="quoteSuccessMsg" class="quote-success-msg" style="display:none;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <div>
+                            <strong>Quote submitted successfully!</strong><br>
+                            <span>Thank you — a member of the Hey Service team will be in touch shortly.</span>
+                        </div>
+                    </div>
+
+                    <form id="quoteContactForm" class="quote-form mailto-form" data-subject="New Quote Request from Website">
                         <div>
                             <label class="form-label">Name</label>
                             <input type="text" name="Name" required class="form-control form-input-custom" placeholder="Your full name">
@@ -186,7 +196,7 @@
                             <label class="form-label">Message</label>
                             <textarea name="Message" required class="form-control form-textarea form-input-custom" rows="4" placeholder="How can we help?"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary quote-submit-btn">Submit Request</button>
+                        <button type="submit" id="quoteSubmitBtn" class="btn btn-primary quote-submit-btn">Submit Request</button>
                     </form>
 
                 </div>
