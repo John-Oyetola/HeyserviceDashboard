@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const animContainers = document.querySelectorAll('.animation-container');
 
     animContainers.forEach(container => {
-        // Adjust bubble count to strictly 10 for phones, keeping the full 40 for tablets and desktops
-        const isPhone = window.innerWidth <= 600; // Standard max width for phone viewports
-        const bubbleCount = isPhone ? 5 : 40;
+        // 12 bubbles on phones, 40 on tablets/desktops
+        const isPhone = window.innerWidth <= 600;
+        const bubbleCount = isPhone ? 12 : 40;
 
         // Dynamic distribution points
         const leftLimit = Math.floor(bubbleCount * 0.375);
@@ -20,38 +20,43 @@ document.addEventListener('DOMContentLoaded', () => {
             const bubble = document.createElement('div');
             bubble.classList.add('bubble');
 
-            // Random properties
+            // Random size
             let size = Math.random() * 100 + 40; // Desktop: 40px - 140px
-            if (isPhone) size = 40; // All mobile bubbles are exactly the smallest size (40px)
+            if (isPhone) size = Math.random() * 30 + 30; // Mobile: 30px - 60px
 
-            // Distributed Layout proportional to total count
+            // Distributed layout
             let left;
             if (i < leftLimit) {
-                left = Math.random() * 30; // 0% - 30% (Left)
+                left = Math.random() * 30;         // 0% - 30% (Left)
             } else if (i < rightLimit) {
-                left = Math.random() * 30 + 70; // 70% - 100% (Right)
+                left = Math.random() * 30 + 70;    // 70% - 100% (Right)
             } else {
-                left = Math.random() * 40 + 30; // 30% - 70% (Middle)
+                left = Math.random() * 40 + 30;    // 30% - 70% (Middle)
             }
 
-            const top = Math.random() * 100; // 0% - 100%
-            const delay = Math.random() * 2; // 0s - 2s
-            const duration = Math.random() * 1.5 + 2; // 2s - 3.5s (Twice as fast)
+            const top = Math.random() * 100;
+            const delay = Math.random() * 2;
+            const duration = Math.random() * 1.5 + 2;
 
-            // Safely lock all bubbles to the user's manually requested vibrant hue palette
-            let allowedColors = ['#2e7d32', '#1565c0', '#6a1b9a', '#c62828', '#ef6c00', '#00838f', '#ad1457'];
+            // Vivid, fully-saturated colour palette
+            const allowedColors = [
+                '#43a047', // vivid green
+                '#1e88e5', // vivid blue
+                '#8e24aa', // vivid purple
+                '#e53935', // vivid red
+                '#fb8c00', // vivid orange
+                '#00acc1', // vivid teal
+                '#d81b60'  // vivid pink
+            ];
             const randomColor = allowedColors[Math.floor(Math.random() * allowedColors.length)];
 
-            // Reapply corrected background color
-            // Reapply corrected background color
             bubble.style.backgroundColor = randomColor;
-            bubble.style.opacity = container.classList.contains('login-box') ? '0.6' : '1';
-            bubble.style.filter = 'saturate(0.6)';
-            bubble.style.width = `${size}px`;
+            bubble.style.opacity = '1';           // Full opacity on all pages
+            bubble.style.width  = `${size}px`;
             bubble.style.height = `${size}px`;
-            bubble.style.left = `${left}%`;
-            bubble.style.top = `${top}%`;
-            bubble.style.animationDelay = `${delay}s`;
+            bubble.style.left   = `${left}%`;
+            bubble.style.top    = `${top}%`;
+            bubble.style.animationDelay    = `${delay}s`;
             bubble.style.animationDuration = `${duration}s`;
 
             container.appendChild(bubble);
