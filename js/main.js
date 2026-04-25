@@ -8,9 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const animContainers = document.querySelectorAll('.animation-container');
 
     animContainers.forEach(container => {
-        // 12 bubbles on phones, 40 on tablets/desktops
-        const isPhone = window.innerWidth <= 600;
-        const bubbleCount = isPhone ? 12 : 40;
+        // 12 on phones, 20 on tablets/laptops, 40 on large desktops
+        const isPhone  = window.innerWidth <= 600;
+        const isTablet = window.innerWidth <= 1199;
+        const bubbleCount = isPhone ? 12 : isTablet ? 20 : 40;
 
         // Dynamic distribution points
         const leftLimit = Math.floor(bubbleCount * 0.375);
