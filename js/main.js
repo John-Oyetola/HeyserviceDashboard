@@ -210,23 +210,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Quote / Contact Form Feedback ===
     const quoteForm = document.getElementById('quoteContactForm');
     if (quoteForm) {
-        quoteForm.addEventListener('submit', (e) => {
+        quoteForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('quoteSubmitBtn');
             const successMsg = document.getElementById('quoteSuccessMsg');
+            const originalText = btn.textContent;
 
             // Button loading state
             btn.textContent = 'Sending...';
             btn.disabled = true;
 
-            // Simulate a brief send delay then show success
-            setTimeout(() => {
-                quoteForm.style.display = 'none';
-                if (successMsg) {
-                    successMsg.style.display = 'flex';
-                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            try {
+                const formData = new FormData(quoteForm);
+                const response = await fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                });
+
+                if (response.ok) {
+                    // Real success — hide form, show confirmation
+                    quoteForm.style.display = 'none';
+                    if (successMsg) {
+                        successMsg.style.display = 'flex';
+                        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                } else {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    alert('Sorry, there was a problem sending your request. Please email us directly at enquiries@theheygroup.net');
                 }
-            }, 800);
+            } catch (err) {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                alert('Connection error. Please email us directly at enquiries@theheygroup.net');
+            }
         });
     }
 
