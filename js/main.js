@@ -222,10 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 const formData = new FormData(quoteForm);
-                const response = await fetch('/', {
+                const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(formData).toString()
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(Object.fromEntries(formData))
                 });
 
                 if (response.ok) {
