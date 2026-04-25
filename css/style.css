@@ -748,7 +748,7 @@ h3 { font-size: 1.5rem; }
 .login-container { position: relative; z-index: 2; width: 100%; max-width: 450px; }
 .login-heading { margin-bottom: 0.5rem; color: var(--text-main); font-size: 2.8rem; font-weight: 900; }
 .login-subtitle { margin-bottom: var(--spacing-md); color: var(--text-main); font-weight: 700; font-size: 1.2rem; }
-.secure-notice { background-color: rgba(21, 101, 192, 0.15); padding: 0.85rem 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 1.05rem; font-weight: 500; color: var(--color-info); display: flex; align-items: center; gap: 0.6rem; line-height: 1.5; border: 1px solid rgba(21, 101, 192, 0.3); }
+.secure-notice { background-color: rgba(21, 101, 192, 0.15); padding: 0.85rem 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 1.05rem; font-weight: 600; color: #0d2263; display: flex; align-items: center; gap: 0.6rem; line-height: 1.5; border: 1px solid rgba(13, 34, 99, 0.35); }
 .error-message { display: none; background-color: rgba(198, 40, 40, 0.1); color: var(--color-danger); padding: 0.5rem; border-radius: 4px; margin-bottom: 1rem; font-size: 0.95rem; font-weight: 600; }
 .form-label-auth { font-weight: 600; color: var(--text-main); font-size: 1.1rem; }
 .form-control-password { padding-right: 40px; }
