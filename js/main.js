@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const response = await fetch('https://heyservicedashboard.onrender.com/api/login', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify({ username: usernameInput, password: passwordInput })
                 });
 
@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const response = await fetch('https://heyservicedashboard.onrender.com/api/register', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify({
                         company: document.getElementById('regCompany').value.trim(),
                         email: document.getElementById('regEmail').value.trim(),
@@ -477,7 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const response = await fetch('https://heyservicedashboard.onrender.com/api/forgot-password', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify({
                         email: document.getElementById('fpEmail').value.trim(),
                         username: document.getElementById('fpUsername').value.trim(),
