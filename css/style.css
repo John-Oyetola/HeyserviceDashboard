@@ -1290,4 +1290,35 @@ body.dark-theme .theme-toggle-btn:hover {
         margin-right: auto;
         order: -1;
     }
+    }
+}
+
+/* === Hide Annoying Google Translate UI Elements === */
+/* 1. Hides the top banner that pushes the page down */
+.goog-te-banner-frame.skiptranslate, .goog-te-banner-frame, iframe.goog-te-banner-frame {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* 2. Prevents the page from shifting down when the banner is hidden */
+body, html {
+    top: 0px !important;
+    position: static !important;
+}
+
+/* 3. Hides the "Original Text" tooltip that appears on hover */
+.goog-tooltip, .goog-tooltip:hover {
+    display: none !important;
+}
+#goog-gt-tt, .goog-te-balloon-frame {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* 4. Removes the yellow highlight on translated text */
+.goog-text-highlight {
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
 }
