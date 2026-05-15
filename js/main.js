@@ -585,53 +585,51 @@ function logout() {
     window.location.href = 'index.html';
 }
 
-// === Multilingual Support ===
-const translations = {
-    en: {
-        heroTitle: "Advanced Service Monitoring",
-        heroText: "Real-time data, instant alerts, and comprehensive site performance reports—all in one intelligent dashboard.",
-        highlightTitle: "Your Operations, Visualized",
-        quoteTitle: "Request a Quote or Consultation Today"
-    },
-    fr: {
-        heroTitle: "Surveillance de Service Avancée",
-        heroText: "Données en temps réel, alertes instantanées et rapports complets sur les performances du site, le tout dans un tableau de bord intelligent.",
-        highlightTitle: "Vos Opérations, Visualisées",
-        quoteTitle: "Demander un Devis ou une Consultation Aujourd'hui"
-    },
-    es: {
-        heroTitle: "Monitorización de Servicios Avanzada",
-        heroText: "Datos en tiempo real, alertas instantáneas y reportes completos de rendimiento del sitio, todo en un tablero inteligente.",
-        highlightTitle: "Tus Operaciones, Visualizadas",
-        quoteTitle: "Solicita una Cotización o Consulta Hoy"
-    }
+// === Full Site Google Translate Integration ===
+window.googleTranslateElementInit = function() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,fr,es',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    const langToggle = document.getElementById('langToggle');
-    if (langToggle) {
-        langToggle.addEventListener('change', (e) => {
-            const lang = e.target.value;
-            const dict = translations[lang];
-            
-            const heroTitle = document.querySelector('.hero-content h1');
-            const heroText = document.querySelector('.hero-text');
-            const highlightTitle = document.querySelector('.highlight-title');
-            const quoteTitle = document.querySelector('.quote-title');
-            
-            if (heroTitle && dict.heroTitle) heroTitle.textContent = dict.heroTitle;
-            if (heroText && dict.heroText) heroText.textContent = dict.heroText;
-            if (highlightTitle && dict.highlightTitle) highlightTitle.textContent = dict.highlightTitle;
-            if (quoteTitle && dict.quoteTitle) quoteTitle.textContent = dict.quoteTitle;
-            
-            localStorage.setItem('heyServiceLang', lang);
-        });
-        
-        // Restore language preference
-        const savedLang = localStorage.getItem('heyServiceLang');
-        if (savedLang && translations[savedLang]) {
-            langToggle.value = savedLang;
-            langToggle.dispatchEvent(new Event('change'));
-        }
+    // 1. Remove the old custom lang toggle if it exists
+    const oldToggle = document.getElementById('langToggle');
+    if (oldToggle) {
+        oldToggle.remove();
     }
+
+    // 2. Create the Google Translate element container
+    const translateDiv = document.createElement('div');
+    translateDiv.id = 'google_translate_element';
+    // Style it to fit neatly in the header
+    translateDiv.style.display = 'inline-block';
+    translateDiv.style.marginRight = '10px';
+    translateDiv.style.verticalAlign = 'middle';
+    translateDiv.style.overflow = 'hidden';
+
+    // 3. Insert it into the header (before themeToggleBtn)
+    const themeBtn = document.getElementById('themeToggleBtn');
+    if (themeBtn && themeBtn.parentNode) {
+        themeBtn.parentNode.insertBefore(translateDiv, themeBtn);
+    }
+
+    // 4. Inject the Google Translate Script
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(script);
+    
+    // 5. Hide the Google Translate banner
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        .goog-te-gadget-icon { display: none; }
+        .goog-te-gadget-simple { background-color: transparent !important; border: 1px solid rgba(128,128,128,0.3) !important; padding: 4px 8px !important; border-radius: 4px; font-family: 'Inter', sans-serif !important; }
+    `;
+    document.head.appendChild(style);
 });
