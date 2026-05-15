@@ -627,13 +627,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const style = document.createElement('style');
     style.innerHTML = `
         /* Hide the top translation banner */
-        .goog-te-banner-frame.skiptranslate, .goog-te-banner-frame { display: none !important; }
+        .goog-te-banner-frame.skiptranslate, .goog-te-banner-frame, iframe.goog-te-banner-frame { display: none !important; visibility: hidden !important; }
         /* Prevent body from shifting down */
         body { top: 0px !important; position: static !important; }
+        html { top: 0px !important; position: static !important; }
         /* Hide the original text popup on hover */
-        #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+        #goog-gt-tt, .goog-te-balloon-frame { display: none !important; visibility: hidden !important; }
         /* Remove the yellow highlight on translated text */
-        .goog-text-highlight { background: none !important; box-shadow: none !important; }
+        .goog-text-highlight { background: none !important; background-color: transparent !important; box-shadow: none !important; border: none !important; }
         /* Clean up the dropdown widget styling */
         .goog-te-gadget-icon { display: none; }
         .goog-te-gadget-simple { background-color: transparent !important; border: 1px solid rgba(128,128,128,0.3) !important; padding: 4px 8px !important; border-radius: 4px; font-family: 'Inter', sans-serif !important; }
