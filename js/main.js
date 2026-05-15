@@ -584,3 +584,54 @@ function logout() {
     localStorage.removeItem('heyServiceCompany');
     window.location.href = 'index.html';
 }
+
+// === Multilingual Support ===
+const translations = {
+    en: {
+        heroTitle: "Advanced Service Monitoring",
+        heroText: "Real-time data, instant alerts, and comprehensive site performance reports—all in one intelligent dashboard.",
+        highlightTitle: "Your Operations, Visualized",
+        quoteTitle: "Request a Quote or Consultation Today"
+    },
+    fr: {
+        heroTitle: "Surveillance de Service Avancée",
+        heroText: "Données en temps réel, alertes instantanées et rapports complets sur les performances du site, le tout dans un tableau de bord intelligent.",
+        highlightTitle: "Vos Opérations, Visualisées",
+        quoteTitle: "Demander un Devis ou une Consultation Aujourd'hui"
+    },
+    es: {
+        heroTitle: "Monitorización de Servicios Avanzada",
+        heroText: "Datos en tiempo real, alertas instantáneas y reportes completos de rendimiento del sitio, todo en un tablero inteligente.",
+        highlightTitle: "Tus Operaciones, Visualizadas",
+        quoteTitle: "Solicita una Cotización o Consulta Hoy"
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+        langToggle.addEventListener('change', (e) => {
+            const lang = e.target.value;
+            const dict = translations[lang];
+            
+            const heroTitle = document.querySelector('.hero-content h1');
+            const heroText = document.querySelector('.hero-text');
+            const highlightTitle = document.querySelector('.highlight-title');
+            const quoteTitle = document.querySelector('.quote-title');
+            
+            if (heroTitle && dict.heroTitle) heroTitle.textContent = dict.heroTitle;
+            if (heroText && dict.heroText) heroText.textContent = dict.heroText;
+            if (highlightTitle && dict.highlightTitle) highlightTitle.textContent = dict.highlightTitle;
+            if (quoteTitle && dict.quoteTitle) quoteTitle.textContent = dict.quoteTitle;
+            
+            localStorage.setItem('heyServiceLang', lang);
+        });
+        
+        // Restore language preference
+        const savedLang = localStorage.getItem('heyServiceLang');
+        if (savedLang && translations[savedLang]) {
+            langToggle.value = savedLang;
+            langToggle.dispatchEvent(new Event('change'));
+        }
+    }
+});
