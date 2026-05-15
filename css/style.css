@@ -346,7 +346,7 @@ h3 { font-size: 1.5rem; }
 
 /* Page 2 - Login */
 .login-wrapper {
-    background-color: var(--bg-main);
+    background-color: #ffffff;
     color: var(--text-main);
     transition: background-color var(--transition-anim), color var(--transition-anim);
     position: relative;
@@ -354,42 +354,11 @@ h3 { font-size: 1.5rem; }
     min-height: 100vh;
 }
 
-/* Apple Liquid Glass Background Blobs */
-.login-wrapper::before,
-.login-wrapper::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    z-index: 0;
-    opacity: 0.5;
-    pointer-events: none;
+body.dark-theme .login-wrapper {
+    background-color: #000000;
 }
 
-.login-wrapper::before {
-    width: 40vw;
-    height: 40vw;
-    min-width: 300px;
-    min-height: 300px;
-    background: var(--color-info);
-    top: -10%;
-    left: -10%;
-}
 
-.login-wrapper::after {
-    width: 35vw;
-    height: 35vw;
-    min-width: 250px;
-    min-height: 250px;
-    background: var(--color-secondary);
-    bottom: -10%;
-    right: -10%;
-}
-
-body.dark-theme .login-wrapper::before,
-body.dark-theme .login-wrapper::after {
-    opacity: 0.3;
-}
 
 .login-box {
     background-color: transparent;
